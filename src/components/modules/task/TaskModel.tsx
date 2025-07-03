@@ -31,7 +31,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { addTask } from "@/components/services/task";
 import { toast } from "sonner";
 
-type TaskFormData = {
+export type TaskFormData = {
   title: string;
   description?: string;
   status: "pending" | "completed";
