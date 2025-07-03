@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
@@ -37,7 +38,11 @@ type TaskFormData = {
   dueDate?: string;
 };
 
-export default function AddTaskDialog() {
+export default function AddTaskDialog({
+  onTaskAdded,
+}: {
+  onTaskAdded: (task: any) => void;
+}) {
   const [open, setOpen] = useState(false);
   // const [loading, setLoading] = useState(true);
 
@@ -52,7 +57,8 @@ export default function AddTaskDialog() {
 
   async function onSubmit(data: TaskFormData) {
     const res = await addTask(data);
-    console.log(res);
+    onTaskAdded(res);
+    window.location.reload();
     if (res?.task) {
       toast.success("task added successfully");
     }

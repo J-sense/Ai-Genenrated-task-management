@@ -10,9 +10,9 @@ import {
   Calendar,
   ChevronDown,
   ChevronUp,
-  Pencil,
   Trash2,
   MoreVertical,
+  Pencil,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
@@ -21,26 +21,16 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { deleteTask } from "@/components/services/task";
+import { toast } from "sonner";
+import { EditModel } from "./EditModel";
 
-// type Task = {
-//   id: string;
-//   title: string;
-//   description?: string;
-//   status: "pending" | "completed";
-//   dueDate: string;
-// };
-
-// type TaskCardProps = {
-//   task: Task;
-//   onEdit: (task: Task) => void;
-//   onDelete: (taskId: string) => void;
-// };
-
-const TaskCard = ({ task, onEdit, onDelete }: any) => {
+const TaskCard = ({ task }: any) => {
   const [subtasks, setSubtasks] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [showSubtasks, setShowSubtasks] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const generateSubtasks = async () => {
     setLoading(true);
@@ -67,6 +57,17 @@ const TaskCard = ({ task, onEdit, onDelete }: any) => {
 
   const toggleDescription = () => setExpanded(!expanded);
   const toggleSubtasks = () => setShowSubtasks(!showSubtasks);
+  const handleDelete = async (id: string) => {
+    try {
+      const res = await deleteTask(id);
+      if (res.message) {
+        toast.success("Deleted successfully");
+      }
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="w-full max-w-md mx-auto group">
@@ -106,12 +107,17 @@ const TaskCard = ({ task, onEdit, onDelete }: any) => {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-40">
-                <DropdownMenuItem onClick={() => onEdit(task)}>
+                <DropdownMenuItem
+                  onSelect={(e) => {
+                    e.preventDefault();
+                    setOpen(true);
+                  }}
+                >
                   <Pencil className="mr-2 h-4 w-4" />
                   <span>Edit</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem
-                  onClick={() => onDelete(task.id)}
+                  onClick={() => handleDelete(task?.id)}
                   className="text-red-600 focus:text-red-600 focus:bg-red-50"
                 >
                   <Trash2 className="mr-2 h-4 w-4" />
@@ -185,6 +191,9 @@ const TaskCard = ({ task, onEdit, onDelete }: any) => {
           )}
         </CardContent>
       </Card>
+
+      {/* ✅ Move your EditModel outside Dropdown so it opens properly */}
+      <EditModel open={open} setOpen={setOpen} task={task} />
     </div>
   );
 };
