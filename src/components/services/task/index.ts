@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-"use server";
 
 export const addTask = async (data: any) => {
   try {
-    const res = await fetch(`http://localhost:3000/api/task`, {
+    const res = await fetch(`/api/task`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -19,7 +18,7 @@ export const addTask = async (data: any) => {
 
 export const allTask = async () => {
   try {
-    const res = await fetch(`http://localhost:3000/api/task`, {
+    const res = await fetch(`/api/task`, {
       method: "GET",
     });
     return res.json();
@@ -31,7 +30,7 @@ export const allTask = async () => {
 
 export const deleteTask = async (id: string) => {
   try {
-    const res = await fetch(`http://localhost:3000/api/task?id=${id}`, {
+    const res = await fetch(`/api/task?id=${id}`, {
       method: "DELETE",
     });
 
@@ -42,7 +41,7 @@ export const deleteTask = async (id: string) => {
   }
 };
 export async function generateSubtasks(taskTitle: string) {
-  const res = await fetch("http://localhost:3000/api/sub-tasks", {
+  const res = await fetch("/api/sub-tasks", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ taskTitle }),
@@ -62,7 +61,7 @@ export const updateTask = async (data: {
   status?: string;
 }) => {
   try {
-    const res = await fetch(`http://localhost:3000/api/task`, {
+    const res = await fetch(`/api/task`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

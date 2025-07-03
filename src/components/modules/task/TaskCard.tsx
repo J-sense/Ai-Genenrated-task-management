@@ -35,7 +35,7 @@ const TaskCard = ({ task }: any) => {
   const generateSubtasks = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:3000/api/sub-task", {
+      const res = await fetch("/api/sub-task", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ taskTitle: task.title }),
