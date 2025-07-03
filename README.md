@@ -1,7 +1,7 @@
 # 🚀 Task Management AI
 
-A modern task management web app built with **Next.js (App Router)**, **TypeScript**, **Tailwind CSS**, and simple in-memory **API routes**.  
-Includes AI-powered subtask suggestions to help you stay productive.
+A modern task management web app built with **Next.js (App Router)**, **TypeScript**, and **Tailwind CSS**.  
+Includes AI-powered subtask suggestions to boost your productivity.
 
 ---
 
@@ -10,8 +10,15 @@ Includes AI-powered subtask suggestions to help you stay productive.
 ✅ Add, edit, delete tasks  
 ✅ AI generates subtasks suggestions  
 ✅ Responsive and beautiful UI with Tailwind  
-✅ Built entirely on Next.js App Router (no external server needed)  
-✅ Ready for Vercel deployment
+✅ Built entirely on Next.js App Router (no external backend needed)  
+✅ Fully deployed on Vercel
+
+---
+
+## 🌐 Live Demo
+
+✅ **Try it here:**  
+👉 [https://task-management-ai.vercel.app/](https://task-management-ai.vercel.app/)
 
 ---
 
